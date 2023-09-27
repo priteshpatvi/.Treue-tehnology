@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #container {
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Length Converter</h1>
+        <label for="length">Enter Length:</label>
+        <input type="text" id="length" placeholder="Enter length in meters">
+        <label for="unit">Select Unit:</label>
+        <select id="unit">
+            <option value="meters">Meters</option>
+            <option value="centimeters">Centimeters</option>
+            <option value="kilometers">Kilometers</option>
+            <option value="millimeters">Millimeters</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertLength() {
+            const lengthInput = document.getElementById('length');
+            const unitSelect = document.getElementById('unit');
+            const resultArea = document.getElementById('result');
+
+            const length = parseFloat(lengthInput.value);
+            const selectedUnit = unitSelect.value;
+
+            if (isNaN(length)) {
+                resultArea.innerText = 'Please enter a valid number.';
+                return;
+            }
+
+            let convertedLength = 0;
+            switch (selectedUnit) {
+                case 'centimeters':
+                    convertedLength = length * 100;
+                    break;
+                case 'kilometers':
+                    convertedLength = length / 1000;
+                    break;
+                case 'millimeters':
+                    convertedLength = length * 1000;
+                    break;
+                default:
+                    convertedLength = length;
+            }
+
+            resultArea.innerText = `${length} meters is equal to ${convertedLength} ${selectedUnit}.`;
+        }
+    </script>
+</body>
+</html>
